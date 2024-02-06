@@ -466,8 +466,7 @@ copyright-section -->
                </div>
            </div>
            </div>
-   <div class="blog-header"> Blogs</span>
-       <span class ="header-caption"> My Latest <span class="color"> blog posts.</span></span></div>
+   <div class="blog-header"> Blogs <span class ="header-caption"> My Latest <span class="color"> blog posts.</span></div>
        <!-- <div class="blog-content">
             <div class="blogs">
                 <a href="#">
@@ -596,13 +595,14 @@ copyright-section -->
             <div class="form-header">
                 Message Me
             </div>
-            <form id="myForm" action="#">
-               <div class="input-line">
-                   <input  id="name" type="text" placeholder="Name" class="input-name">
-                   <input id="email" type="email" placeholder="Email"  class="input-name">
+            <form id="myForm" action="https://api.web3forms.com/submit" method="post">
+                <input type="hidden" name="access_key" value="0283234d-c6e5-4880-83f0-c63b25d0bd25">
+                <div class="input-line">
+                   <input  id="name" type="text" placeholder="Name" class="input-name" required>
+                   <input id="email" type="email" placeholder="Email"  class="input-name" required>
                </div>
                <input type="text" id="subject" placeholder="subject" class="input-subject">
-               <textarea id ="body" class="input-textarea" placeholder="message"></textarea>
+               <textarea id ="body" class="input-textarea" placeholder="message" required></textarea>
                <button type="button" id ="submit" value="send">Submit</button>
             </form>
           
