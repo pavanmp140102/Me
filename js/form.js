@@ -24,7 +24,8 @@ $(document).ready(function() {
             encode: true
         })
         .done(function(response) {
-            $('#result').html(response.message);
+            // Display a pop-up with the response message
+            alert(response.message);
             // Reset form fields
             $('#name').val('');
             $('#email').val('');
