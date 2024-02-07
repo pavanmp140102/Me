@@ -1,38 +1,39 @@
-    document.getElementById('submit').addEventListener('click', function() {
-        // Fetch form data
-        const name = document.getElementById('name').value;
-        const email = document.getElementById('email').value;
-        const subject = document.getElementById('subject').value;
-        const body = document.getElementById('body').value;
+$(document).ready(function() {
+    $('#submit').on('click', function(e) {
+        e.preventDefault(); // Prevent the default form submission behavior
 
-        // Construct the form data to be submitted
-        const formData = new FormData();
-        formData.append('name', name);
-        formData.append('email', email);
-        formData.append('subject', subject);
-        formData.append('body', body);
+        var name = $('#name').val();
+        var email = $('#email').val();
+        var subject = $('#subject').val();
+        var message = $('#body').val();
 
-        // Send form data asynchronously
-        fetch('https://api.web3forms.com/submit', {
-            method: 'POST',
-            body: formData
+        var formData = {
+            access_key: '0283234d-c6e5-4880-83f0-c63b25d0bd25', // Replace with your actual access key
+            email: email,
+            name: name,
+            phone: '', // You can add phone number field if needed
+            message: message,
+            botcheck: '' // You can add botcheck field if needed
+        };
+
+        $.ajax({
+            type: 'POST',
+            url: 'https://api.web3forms.com/submit',
+            data: formData,
+            dataType: 'json',
+            encode: true
         })
-        .then(response => {
-            if (response.ok) {
-                // If form submission is successful, clear form fields
-                document.getElementById('name').value = '';
-                document.getElementById('email').value = '';
-                document.getElementById('subject').value = '';
-                document.getElementById('body').value = '';
-                // Display a success message
-                alert('Message sent successfully!');
-            } else {
-                // If form submission fails, display an error message
-                alert('Form submission failed. Please try again later.');
-            }
+        .done(function(response) {
+            $('#result').html(response.message);
+            // Reset form fields
+            $('#name').val('');
+            $('#email').val('');
+            $('#subject').val('');
+            $('#body').val('');
         })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('An error occurred. Please try again later.');
+        .fail(function(error) {
+            console.log(error);
+            $('#result').html('Something went wrong!');
         });
     });
+});
